@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Binance Prices</title>
+  </head>
+  <body>
+    <h1>Binance Prices in USDT</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Symbol</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for price in prices %}
+        <tr>
+          <td>{{ price.symbol }}</td>
+          <td>{{ price.price }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>
