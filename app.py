@@ -64,20 +64,20 @@ def get_prices_matrix(prices):
 
     return matrix
 
- def get_triangular_arbitrage_opportunities_optimized(prices):
-    opportunities = []
-    prices_matrix = get_prices_matrix(prices)
-    for coin1 in prices:
-        for coin2 in prices:
-            if coin2 in prices[coin1]:
-                for coin3 in prices:
-                    if coin3 in prices_matrix[coin2] and coin1 in prices_matrix[coin3]:
-                        # Calculate the potential profit after trading fees
-                        profit = (1 / prices_matrix[coin1][coin2]) * (1 / prices_matrix[coin2][coin3]) * prices_matrix[coin3][coin1] * (1 - 0.001)**2 - 1
+def get_triangular_arbitrage_opportunities_optimized(prices):
+   opportunities = []
+   prices_matrix = get_prices_matrix(prices)
+   for coin1 in prices:
+       for coin2 in prices:
+           if coin2 in prices[coin1]:
+               for coin3 in prices:
+                   if coin3 in prices_matrix[coin2] and coin1 in prices_matrix[coin3]:
+                       # Calculate the potential profit after trading fees
+                       profit = (1 / prices_matrix[coin1][coin2]) * (1 / prices_matrix[coin2][coin3]) * prices_matrix[coin3][coin1] * (1 - 0.001)**2 - 1
 
-                        if profit > 0:
-                            opportunities.append({'coins': f'{coin1} -> {coin2} -> {coin3} -> {coin1}',
-                                                  'profit': profit})
+                       if profit > 0:
+                           opportunities.append({'coins': f'{coin1} -> {coin2} -> {coin3} -> {coin1}',
+                                                 'profit': profit})
 
     # Sort the opportunities by profit
     opportunities = sorted(opportunities, key=lambda x: x['profit'], reverse=True)
