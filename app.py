@@ -9,8 +9,8 @@ app = Flask(__name__)
 # create Binance exchange object
 exchange = ccxt.binance({
     'enableRateLimit': True,  # enable rate-limiting
-    'apiKey': '<your_api_key>',  # replace with your API key
-    'secret': '<your_secret>',  # replace with your API secret
+    'apiKey': 'OtmdN18Tgx7VjnLyD4Ulc7ooNUaS0ezw38EZtTXvz0Eln4LxePIGCjOC95WG80OG',  # replace with your API key
+    'secret': 'ShmYzH63927bieEp6SgHTDXv3hlEdkiePHMsSpdXpbviKNJbGpPSS6M3YSTACq4u',  # replace with your API secret
 })
 
 # define route for home page
