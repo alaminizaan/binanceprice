@@ -169,6 +169,6 @@ def get_prices():
         # log any errors that occur while fetching prices
         logging.error(f"Error fetching prices: {e}")
         return jsonify({'error': str(e)}), 500
-# start Flask app
+# start Flask appp
 if __name__ == '__main__':
     app.run(debug=True)
