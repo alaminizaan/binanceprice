@@ -105,9 +105,9 @@ def home():
                 for symbol, ticker in exchange_tickers.items():
                  tickers[f"{exchange_id}:{symbol}"] = ticker['last']
 
-        except Exception as e:
-            # log any errors that occur while processing this exchange
-            logging.error(f"Error processing {exchange_id}: {e}")
+            except Exception as e:
+             # log any errors that occur while processing this exchange
+             logging.error(f"Error processing {exchange_id}: {e}")
 
     # filter markets to include only those with USDT base and quote currencies
     usdt_markets = [market for market in markets if isinstance(market, dict) and market.get('quote') == 'USDT' and market.get('active')]
