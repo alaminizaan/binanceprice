@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Triangular Arbitrage Opportunity Scanner</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			// get current USD exchange rates
+			$.getJSON('/usd_rates', function(data) {
+				var usd_rates = data;
+
+				// convert prices to USD
+				$('.price').each(function() {
+					var symbol = $(this).data('symbol');
+					var price = parseFloat($(this).text());
+					var usd_price = price * usd_rates[symbol];
+					$(this).text('$' + usd_price.toFixed(2));
+				});
+			});
+			
+			// update prices in real-time
+			setInterval(function() {
+				$.getJSON('/prices', function(data) {
+					var prices = data;
+					
+					// convert prices to USD
+					$('.price').each(function() {
+						var symbol = $(this).data('symbol');
+						var price = parseFloat(prices[symbol]);
+						var usd_price = price * usd_rates[symbol];
+						$(this).text('$' + usd_price.toFixed(2));
+					});
+				});
+			}, 5000);
+		});
+	</script>
+</head>
+<body>
+	<h1>Triangular Arbitrage Opportunity Scanner</h1>
+	
+	<h2>Opportunities</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Pair 1</th>
+				<th>Pair 2</th>
+				<th>Pair 3</th>
+				<th>Profit</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for opportunity in opportunities %}
+			<tr>
+				<td>{{ opportunity.pair1 }}</td>
+				<td>{{ opportunity.pair2 }}</td>
+				<td>{{ opportunity.pair3 }}</td>
+				<td>{{ opportunity.profit }}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	
+	<h2>Prices</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Market</th>
+				<th>Price (USD)</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for symbol, price in prices.items() %}
+			<tr>
+				<td>{{ symbol }}</td>
+				<td class="price" data-symbol="{{ symbol }}">{{ price }}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</body>
+</html>
