@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Triangular Arbitrage Opportunities</title>
+</head>
+<body>
+    <h1>Triangular Arbitrage Opportunities</h1>
+    {% if opportunities %}
+        <ul>
+        {% for opportunity in opportunities %}
+            <li>{{ opportunity }}</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No triangular arbitrage opportunities found.</p>
+    {% endif %}
+</body>
+</html>
