@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Triangular Arbitrage Opportunities</title>
+  </head>
+  <body>
+    <h1>Triangular Arbitrage Opportunities</h1>
+    {% if opportunities %}
+      <table>
+        <thead>
+          <tr>
+            <th>Pair 1</th>
+            <th>Pair 2</th>
+            <th>Pair 3</th>
+            <th>Profit (%)</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for opportunity in opportunities %}
+            <tr>
+              <td>{{ opportunity['pair1'] }}</td>
+              <td>{{ opportunity['pair2'] }}</td>
+              <td>{{ opportunity['pair3'] }}</td>
+              <td>{{ opportunity['profit'] * 100 }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>No triangular arbitrage opportunities found.</p>
+    {% endif %}
+    <h2>Current Prices</h2>
+    {% if prices %}
+      <table>
+        <thead>
+          <tr>
+            <th>Symbol</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for symbol, price in prices.items() %}
+            <tr>
+              <td>{{ symbol }}</td>
+              <td>{{ price }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>No prices found.</p>
+    {% endif %}
+    <script>
+      // use jQuery to fetch real-time prices every 5 seconds and update the prices table
+      $(document).ready(function() {
+        setInterval(function() {
+          $.getJSON('/prices', function(prices) {
+            $.each(prices, function(symbol, price) {
+              $('#price-' + symbol).text(price);
+            });
+          });
+        }, 5000);
+      });
+    </script>
+  </body>
+</html>
+
+
+
