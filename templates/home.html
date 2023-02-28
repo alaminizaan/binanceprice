@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Triangular Arbitrage Opportunities</title>
+  </head>
+  <body>
+    <h1>Triangular Arbitrage Opportunities</h1>
+    {% if opportunities %}
+    <table>
+      <thead>
+        <tr>
+          <th>Pair 1</th>
+          <th>Pair 2</th>
+          <th>Pair 3</th>
+          <th>Profit (%)</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for opportunity in opportunities %}
+        <tr>
+          <td>{{ opportunity['pair1'] }}</td>
+          <td>{{ opportunity['pair2'] }}</td>
+          <td>{{ opportunity['pair3'] }}</td>
+          <td>{{ opportunity['profit'] * 100 | round(2) }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <p>No opportunities found.</p>
+    {% endif %}
+  </body>
+</html>
