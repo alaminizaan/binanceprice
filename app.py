@@ -102,8 +102,8 @@ def home():
                 exchange_tickers = exchange.fetch_tickers([market['symbol'] for market in usdt_markets])
 
                 # update the main tickers dictionary with the prices from this exchange
-                            for symbol, ticker in exchange_tickers.items():
-                tickers[f"{exchange_id}:{symbol}"] = ticker['last']
+                for symbol, ticker in exchange_tickers.items():
+                 tickers[f"{exchange_id}:{symbol}"] = ticker['last']
 
         except Exception as e:
             # log any errors that occur while processing this exchange
