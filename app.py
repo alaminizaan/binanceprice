@@ -21,7 +21,7 @@ def get_usd_equivalent(symbol, quantity):
         return quantity
     
     # get ticker data for symbol's USD pair
-    ticker = exchange.fetch_ticker(symbol+'/USDT')
+    ticker = exchange.fetch_ticker(symbol)
     
     # calculate USD equivalent of quantity
     usd_equivalent = quantity * ticker['last']
