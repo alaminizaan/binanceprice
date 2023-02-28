@@ -50,7 +50,7 @@ def home():
         opportunities.sort(key=lambda x: x['profit'], reverse=True)
 
         # render home page template with opportunities
-        return render_template('home.html', opportunities=opportunities[:10])
+        return render_template('home.html', opportunities=opportunities)
     except Exception as e:
         # log any errors that occur
         logging.error(e)
