@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Crypto Arbitrage Opportunities</title>
+    </head>
+    <body>
+        <h1>Crypto Arbitrage Opportunities</h1>
+        <p>Below are the top three arbitrage opportunities:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Exchange</th>
+                    <th>Pair 1</th>
+                    <th>Pair 2</th>
+                    <th>Pair 3</th>
+                    <th>Profit</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for opportunity in opportunities %}
+                <tr>
+                    <td>{{ opportunity.exchange }}</td>
+                    <td>{{ opportunity.pair1 }}</td>
+                    <td>{{ opportunity.pair2 }}</td>
+                    <td>{{ opportunity.pair3 }}</td>
+                    <td>{{ opportunity.profit }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <h2>Current Prices</h2>
+        <p>Below are the current prices for all USDT markets across all supported exchanges:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Exchange</th>
+                    <th>Pair</th>
+                    <th>Last Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for exchange_id, tickers in tickers.items() %}
+                {% for ticker in tickers %}
+                <tr>
+                    <td>{{ exchange_id }}</td>
+                    <td>{{ ticker.symbol }}</td>
+                    <td>{{ ticker.last_price }}</td>
+                </tr>
+                {% endfor %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </body>
+</html>
